@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/simulate', (req, res) => {
-	// req.body is now your array (e.g., ["5 3", "1 1 E", ...])
 	const inputData = req.body;
 
 	if (!Array.isArray(inputData) || inputData.length === 0) {
