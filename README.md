@@ -100,3 +100,14 @@ npm run dev
 
 - The frontend expects the backend to be running at http://localhost:3001/api/simulate.
 - The simulator uses a simple set of movement rules with support for lost robots.
+
+## Future improvements
+
+Possible next steps for the project include:
+
+- Add a database to save past missions, robot histories, and user-created scenarios.
+- Build a more graphical interface with an animated grid, robot movement visualization, and step-by-step playback.
+- Turn the experience into a game-like simulator with levels, challenges, and scoring.
+- Add authentication and user accounts so multiple people can manage and compare simulations.
+- Introduce analytics and export options to review mission outcomes and share results.
+- Improve the overall experience with richer visual feedback, presets, and support for more complex robot behaviors.
