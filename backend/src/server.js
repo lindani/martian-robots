@@ -1,10 +1,11 @@
 import express from 'express';
+import cors from 'cors'; // Import cors
 import { processMartianRobots } from './engine/simulator.js';
 
 const app = express();
 const PORT = 3001;
 
-// Middleware to parse JSON
+app.use(cors());
 app.use(express.json());
 
 app.post('/api/simulate', (req, res) => {
