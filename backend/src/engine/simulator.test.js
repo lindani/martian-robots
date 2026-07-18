@@ -22,4 +22,10 @@ describe('Martian Robots Core Engine', () => {
 
 		expect(result).toBe(expectedOutput);
 	});
+
+	it('should default to north when the starting orientation is unsupported', () => {
+		const result = processMartianRobots(['5 5', '1 1 X', 'F'].join('\n'));
+
+		expect(result).toBe('1 2 N');
+	});
 });

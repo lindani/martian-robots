@@ -11,6 +11,9 @@ class Robot {
 		this.x = x;
 		this.y = y;
 		this.dirIndex = DIRECTIONS.indexOf(orientation);
+		if (this.dirIndex === -1) {
+			this.dirIndex = 0;
+		}
 		this.bounds = bounds;
 		this.scents = scents;
 		this.isLost = false;
