@@ -33,7 +33,11 @@ export default function Home() {
 			setOutput(res.data.output || 'No output returned.');
 		} catch (err: unknown) {
 			console.error(err);
-			setError('Could not connect to the backend. Make sure the simulator service is running.');
+			if (axios.isAxiosError(err) && err.response?.data?.error) {
+				setError(String(err.response.data.error));
+			} else {
+				setError('Could not connect to the backend. Make sure the simulator service is running.');
+			}
 			setOutput('');
 		} finally {
 			setLoading(false);
