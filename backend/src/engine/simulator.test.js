@@ -4,7 +4,7 @@ describe('Martian Robots Core Engine', () => {
 	it('should process sample input and output the exact expected results', () => {
 		const sampleInput = [
 			'5 3',
-			'1 1 S',
+			'1 1 E',
 			'RERERERE',
 			'3 2 N',
 			'FRRELLFERRELL',
