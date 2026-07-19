@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors'; // Import cors
-import { processMartianRobots } from './engine/simulator.js';
+import { InputValidationError, processMartianRobots } from './engine/simulator.js';
 
 const app = express();
 const PORT = 3001;
@@ -11,7 +11,7 @@ app.use(express.json());
 app.post('/api/simulate', (req, res) => {
 	const inputData = req.body;
 
-	if (!Array.isArray(inputData) || inputData.length === 0) {
+	if (!Array.isArray(inputData) || inputData.length === 0 || !inputData.every(item => typeof item === 'string')) {
 		return res.status(400).json({ error: 'Input must be an array of strings.' });
 	}
 
@@ -22,6 +22,9 @@ app.post('/api/simulate', (req, res) => {
 		res.json({ output: result });
 	} catch (error) {
 		console.error('Simulation error:', error);
+		if (error instanceof InputValidationError) {
+			return res.status(400).json({ error: error.message });
+		}
 		res.status(500).json({ error: 'Failed to process simulation.' });
 	}
 });

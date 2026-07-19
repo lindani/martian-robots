@@ -86,6 +86,88 @@ curl -X POST http://localhost:3001/api/simulate \
   -d '["5 3","1 1 E","RFRFRFRF"]'
 ```
 
+### Example scenarios
+
+1. Valid mission with two robots:
+
+```bash
+curl -X POST http://localhost:3001/api/simulate \
+  -H "Content-Type: application/json" \
+  -d '["5 3","1 1 E","RFRFRFRF","3 2 N","FRRFLLFFRRFLL"]'
+```
+
+Expected response:
+
+```json
+{
+  "output": "1 1 E\n3 3 N LOST"
+}
+```
+
+2. Valid mission with a robot that goes lost:
+
+```bash
+curl -X POST http://localhost:3001/api/simulate \
+  -H "Content-Type: application/json" \
+  -d '["5 3","0 3 W","LLFFFLFLFL"]'
+```
+
+Expected response:
+
+```json
+{
+  "output": "2 3 S"
+}
+```
+
+3. Invalid orientation:
+
+```bash
+curl -X POST http://localhost:3001/api/simulate \
+  -H "Content-Type: application/json" \
+  -d '["5 5","1 1 X","F"]'
+```
+
+Expected response:
+
+```json
+{
+  "error": "Robot orientation on line 2 must be one of N, E, S, W."
+}
+```
+
+4. Invalid instruction characters:
+
+```bash
+curl -X POST http://localhost:3001/api/simulate \
+  -H "Content-Type: application/json" \
+  -d '["5 5","1 1 E","RFX"]'
+```
+
+Expected response:
+
+```json
+{
+  "error": "Instruction line 3 may only contain the commands L, R, and F without spaces."
+}
+```
+
+5. Robot starting outside grid bounds:
+
+```bash
+curl -X POST http://localhost:3001/api/simulate \
+  -H "Content-Type: application/json" \
+  -d '["5 5","6 0 E","F"]'
+```
+
+Expected response:
+
+```json
+{
+  "error": "Robot coordinates on line 2 are outside the grid bounds."
+}
+```
+
 ## Project structure
 
 - [src/server.js](src/server.js) - Express server and API route
